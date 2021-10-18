@@ -1,21 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'package:app_hamburger/Counters/orderNumberProvider.dart';
-import 'package:app_hamburger/Authentication/authenication.dart';
-import 'package:app_hamburger/Config/config.dart';
-import 'package:app_hamburger/Counters/ItemQuantity.dart';
-import 'package:app_hamburger/Counters/cartitemcounter.dart';
-import 'package:app_hamburger/Counters/categoryProvider.dart';
-import 'package:app_hamburger/Counters/changeAddresss.dart';
-import 'package:app_hamburger/Counters/totalMoney.dart';
-import 'package:app_hamburger/Models/item.dart';
-import 'package:app_hamburger/Models/producto_model.dart';
-import 'package:app_hamburger/Store/cart.dart';
-import 'package:app_hamburger/Widgets/loadingWidget.dart';
-import 'package:app_hamburger/Widgets/myDrawer.dart';
-import 'package:app_hamburger/src/categories.dart';
-import 'package:app_hamburger/src/hamburgers_list.dart';
-import 'package:app_hamburger/src/header.dart';
+import 'package:pepe_food/Counters/orderNumberProvider.dart';
+import 'package:pepe_food/Authentication/authenication.dart';
+import 'package:pepe_food/Config/config.dart';
+import 'package:pepe_food/Counters/ItemQuantity.dart';
+import 'package:pepe_food/Counters/cartitemcounter.dart';
+import 'package:pepe_food/Counters/categoryProvider.dart';
+import 'package:pepe_food/Counters/changeAddresss.dart';
+import 'package:pepe_food/Counters/totalMoney.dart';
+import 'package:pepe_food/Models/item.dart';
+import 'package:pepe_food/Models/producto_model.dart';
+import 'package:pepe_food/Store/cart.dart';
+import 'package:pepe_food/Widgets/loadingWidget.dart';
+import 'package:pepe_food/Widgets/myDrawer.dart';
+import 'package:pepe_food/src/categories.dart';
+import 'package:pepe_food/src/hamburgers_list.dart';
+import 'package:pepe_food/src/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -80,7 +80,7 @@ class _HamburgerState extends State<Hamburger> {
           SliverAppBar(
             pinned: true,
             title: Text(
-              "Chiken-Mac",
+              "Pepe food",
               style: TextStyle(fontSize: 30),
             ),
             // leading: IconButton(icon:Icon(Icons.menu), onPressed: (){
@@ -292,12 +292,19 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "images/icon/icon.png",
+                "images/mini-van.png",
                 height: 200.0,
                 width: 240.0,
               ),
               SizedBox(
                 height: 20.0,
+              ),
+              Text(
+                "Don Pepe Food",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 "Servicio de Comida",
