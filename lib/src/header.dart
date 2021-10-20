@@ -28,7 +28,7 @@ class _HeaderState extends State<Header> {
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   height: size.height / 5,
                   decoration: BoxDecoration(
-                  color: Colors.teal,
+                  color: Colors.white,
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(45)
                   ),
@@ -37,36 +37,26 @@ class _HeaderState extends State<Header> {
                   ]  
                 ),
                 child: Column(
+                  
                   children: [
+                    SizedBox(height: 20,),
+                    Text("Donde Estoy?",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                    Text(
+                      "En:",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
                     Row(
                       children: [
                         SizedBox(height: 20,),
                         
-                        CircleAvatar(
-                        backgroundColor: Colors.orange,
-                        radius: 35,
-                        child: CircleAvatar(onBackgroundImageError: null ,
-                      //     backgroundImage: NetworkImage(
-                      //    EcommerceApp.sharedPreferences.getString(EcommerceApp.userAvatarUrl),
-                      //  ),
-                          radius: 32,
-                        ),
-                        ),
+                       
                         SizedBox(width: 5),
                         Column(
                           children: [
                             // Text(EcommerceApp.sharedPreferences.getString(EcommerceApp.userName), 
                             // style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
-                            Container(
-                              margin: EdgeInsets.all(5),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.orange
-                              ),
-                              child: Text("Premium User",
-                              style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 11),),
-                            ),
+                            
                           ],
                         ),
                         Spacer(),

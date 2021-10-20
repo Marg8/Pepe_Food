@@ -30,14 +30,14 @@ class CustomTextField extends StatelessWidget
       child: TextFormField(
         controller: controller,
         obscureText: isObsecure,
-          cursorColor: Colors.teal,
+          cursorColor: Colors.yellow,
           decoration: InputDecoration(
             border: InputBorder.none,
             prefixIcon: Icon(
               data,
               color: Colors.black,
             ),
-            focusColor:  Colors.teal,
+            focusColor:  Colors.yellow,
             hintText: hintText,
           ),
       ),

@@ -66,7 +66,7 @@ class _LoginState extends State<Login>
                   ),
                   CustomTextField(
                     controller: _passwordTextEditingController,
-                    data: Icons.person,
+                    data: Icons.lock,
                     hintText: "Password",
                     isObsecure: true,
                   ),
@@ -86,7 +86,7 @@ class _LoginState extends State<Login>
                 );
               },
               color: Colors.black,
-              child: Text("Login", style: TextStyle(color: Colors.white),),
+              child: Text("Iniciar", style: TextStyle(color: Colors.white),),
             ),
             SizedBox(
               height: 50.0,
@@ -104,7 +104,7 @@ class _LoginState extends State<Login>
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) => AdminSignInPage())),
               icon: (Icon(Icons.nature_people, color: Colors.white,)),
-              label: Text("i'm admin", style: TextStyle(
+              label: Text("Soy Pepe Food", style: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),),
             )
           ],
@@ -154,7 +154,7 @@ class _LoginState extends State<Login>
       await EcommerceApp.sharedPreferences.setString("uid", dataSnapshot.data()[EcommerceApp.userUID]);
       await EcommerceApp.sharedPreferences.setString(EcommerceApp.userEmail, dataSnapshot.data()[EcommerceApp.userEmail]);
       await EcommerceApp.sharedPreferences.setString(EcommerceApp.userName, dataSnapshot.data()[EcommerceApp.userName]);
-      await EcommerceApp.sharedPreferences.setString(EcommerceApp.userAvatarUrl, dataSnapshot.data()[EcommerceApp.userAvatarUrl]);
+      
 
       List<String> carList = dataSnapshot.data()[EcommerceApp.userCartList].cast<String>();
       await EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, carList);

@@ -22,7 +22,7 @@ class _AdminShiftOrders1State extends State<AdminShiftOrders1> {
           flexibleSpace: Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(
-                colors: [Colors.teal, Colors.teal],
+                colors: [Colors.yellow, Colors.yellow],
                 begin: const FractionalOffset(0.0, 0.0),
                 end: const FractionalOffset(1.0, 0.0),
                 stops: [0.0, 1.0],

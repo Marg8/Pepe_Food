@@ -35,7 +35,7 @@
 //             padding: EdgeInsets.symmetric(horizontal: 15),
 //             height: size.height / 5,
 //             decoration: BoxDecoration(
-//                 color: Colors.teal,
+//                 color: Colors.yellow,
 //                 borderRadius:
 //                     BorderRadius.vertical(bottom: Radius.circular(10)),
 //                 boxShadow: [

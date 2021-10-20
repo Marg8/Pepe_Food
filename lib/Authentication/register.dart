@@ -47,19 +47,7 @@ class _RegisterState extends State<Register> {
           mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(height: 10.0,),
-            InkWell(
-              onTap: _selectAndPickImage,
-              child: CircleAvatar(
-                radius: _screenWidth * 0.15,
-                backgroundColor: Colors.white,
-                backgroundImage: _imageFile == null ? null : FileImage(
-                    _imageFile),
-                child: _imageFile == null
-                    ? Icon(Icons.add_photo_alternate, size: _screenWidth * 0.15,
-                  color: Colors.grey,)
-                    : null,
-              ),
-            ),
+       
             SizedBox(height: 8.0,),
             Form(
               key: _formKey,
@@ -68,25 +56,25 @@ class _RegisterState extends State<Register> {
                   CustomTextField(
                     controller: _nameTextEditingController,
                     data: Icons.person,
-                    hintText: "Name",
+                    hintText: "Nombre",
                     isObsecure: false,
                   ),
                   CustomTextField(
                     controller: _emailTextEditingController,
                     data: Icons.email,
-                    hintText: "Email",
+                    hintText: "Correo",
                     isObsecure: false,
                   ),
                   CustomTextField(
                     controller: _passwordTextEditingController,
-                    data: Icons.person,
+                    data: Icons.lock,
                     hintText: "Password",
                     isObsecure: true,
                   ),
                   CustomTextField(
                     controller: _cPasswordTextEditingController,
-                    data: Icons.person,
-                    hintText: "Confirm Password",
+                    data: Icons.lock,
+                    hintText: "Confirmar Password",
                     isObsecure: true,
                   ),
                 ],
@@ -97,7 +85,7 @@ class _RegisterState extends State<Register> {
                 uploadAndSaveImage();
               },
               color: Colors.black,
-              child: Text("Sign up", style: TextStyle(color: Colors.white),),
+              child: Text("Iniciar", style: TextStyle(color: Colors.white),),
             ),
             SizedBox(
               height: 30.0,
@@ -116,23 +104,11 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Future<void> _selectAndPickImage() async
-  {
-    final _imageFileP = await pickerImg.getImage(source: ImageSource.gallery);
-    setState(() {
-      _imageFile = File(_imageFileP.path);
-    });
-  }
+
 
   Future<void> uploadAndSaveImage() async
   {
-    if (_imageFile == null) {
-      showDialog(context: context, builder: (c) {
-        return ErrorAlertDialog(message: "Please select an image file.",);
-      }
-      );
-    }
-    else {
+   
       _passwordTextEditingController.text ==
           _cPasswordTextEditingController.text
 
@@ -141,12 +117,11 @@ class _RegisterState extends State<Register> {
           _cPasswordTextEditingController.text.isNotEmpty &&
           _nameTextEditingController.text.isNotEmpty
 
-          ? uploadToStorage()
+          ? _registerUser()
 
           : displayDilog("Please fill up the registration complete form..")
           : displayDilog("Passsword do not macth.");
-    }
-  }
+      }
 
   displayDilog(String msg) {
     showDialog(context: context,
@@ -155,28 +130,6 @@ class _RegisterState extends State<Register> {
         });
   }
 
-
-  uploadToStorage() async
-  {
-    showDialog(
-        context: context,
-        builder: (c) {
-          return LoadingAlertDialog();
-        }
-    );
-    String imageFileName = DateTime.now().millisecondsSinceEpoch.toString();
-
-    Reference storageReference = FirebaseStorage.instance.ref().child(imageFileName);
-
-    UploadTask storageUploadTask = storageReference.putFile(_imageFile);
-
-    TaskSnapshot taskSnapshot = await storageUploadTask;
-     await taskSnapshot.ref.getDownloadURL().then((urlImage){
-       userImageUrl = urlImage;
-
-       _registerUser();
-    });
-  }
   FirebaseAuth _auth = FirebaseAuth.instance;
   void _registerUser() async
   {

@@ -50,11 +50,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-            cardColor: Colors.teal,
-            appBarTheme: AppBarTheme(color: Colors.teal, centerTitle: true),
-            bottomAppBarColor: Colors.teal,
+            cardColor: Colors.white,
+            appBarTheme: AppBarTheme(color: Colors.yellow, centerTitle: true),
+            bottomAppBarColor: Colors.yellow,
             floatingActionButtonTheme:
-                FloatingActionButtonThemeData(backgroundColor: Colors.orange)),
+                FloatingActionButtonThemeData(backgroundColor: Colors.black)),
         home: SplashScreen(),
         // routes: {BurgerPage.tag: (_)=>BurgerPage()},
         debugShowCheckedModeBanner: false,
@@ -78,16 +78,24 @@ class _HamburgerState extends State<Hamburger> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            leading: Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  icon: Icon(
+                    Icons.list,
+                    color: Colors.black,
+                  ));
+            }),
             pinned: true,
             title: Text(
-              "Pepe food",
-              style: TextStyle(fontSize: 30),
+              "Pepe Food",
+              style: TextStyle(fontSize: 30, color: Colors.black),
             ),
             // leading: IconButton(icon:Icon(Icons.menu), onPressed: (){
 
             // }),
             actions: [
-              AgregadosCompras(),
+              // AgregadosCompras(),
             ],
           ),
           Header(),
@@ -136,7 +144,7 @@ class _HamburgerState extends State<Hamburger> {
               Spacer(),
               IconButton(
                   icon: Icon(Icons.add_alert),
-                  color: Colors.white,
+                  color: Colors.black,
                   onPressed: () {
                     _mostrarAlerta(context);
                   }),
@@ -144,7 +152,7 @@ class _HamburgerState extends State<Hamburger> {
               Spacer(),
               IconButton(
                   icon: Icon(Icons.turned_in),
-                  color: Colors.white,
+                  color: Colors.black,
                   onPressed: () {
                     _mostrarAlerta(context);
                   }),
@@ -305,6 +313,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: Colors.black,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 20.0,
               ),
               Text(
                 "Servicio de Comida",

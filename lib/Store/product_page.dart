@@ -49,7 +49,7 @@ class _ProductPageState extends State<ProductPage> {
         Container(
           padding: const EdgeInsets.only(top: 0, bottom: 0, left: 8, right: 8),
           width: MediaQuery.of(context).size.width,
-          color: Colors.teal,
+          color: Colors.yellow,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -386,7 +386,7 @@ class AddToCartBottom extends StatelessWidget {
 //       decoration: BoxDecoration(
 //         borderRadius: BorderRadius.circular(28),
 //         border: Border.all(
-//           color: Colors.teal,
+//           color: Colors.yellow,
 //           width: 2,
 //         ),
 //       ),

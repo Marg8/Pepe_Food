@@ -41,10 +41,10 @@ class _AuthenticScreenState extends State<AuthenticScreen> {
             tabs: [
               Tab(
                 icon: Icon(Icons.lock, color: Colors.black,),
-                text: "Login",
+                text: "Ingresar",
               ),
               Tab(icon: Icon(Icons.perm_contact_calendar, color: Colors.black,),
-                text: "Register",
+                text: "Registrar",
               ),
 
             ],

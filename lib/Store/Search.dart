@@ -82,7 +82,7 @@ class _SearchProductState extends State<SearchProduct> {
       height: 80.0,
       decoration: new BoxDecoration(
         gradient: new LinearGradient(
-          colors: [Colors.teal, Colors.teal],
+          colors: [Colors.yellow, Colors.yellow],
           begin: const FractionalOffset(0.0, 0.0),
           end: const FractionalOffset(1.0, 0.0),
           stops: [0.0, 1.0],
@@ -177,7 +177,7 @@ class _SearchProductAdminState extends State<SearchProductAdmin> {
       height: 80.0,
       decoration: new BoxDecoration(
         gradient: new LinearGradient(
-          colors: [Colors.teal, Colors.teal],
+          colors: [Colors.yellow, Colors.yellow],
           begin: const FractionalOffset(0.0, 0.0),
           end: const FractionalOffset(1.0, 0.0),
           stops: [0.0, 1.0],
