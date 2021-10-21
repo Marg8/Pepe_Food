@@ -13,52 +13,81 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
+
+
 Widget sourceInfoBurger(ItemModel model, BuildContext context,
     {Color background, removeCartFunction}) {
   int items = 10;
 
   //  bool reverse = index.isEven;
+final Size size = MediaQuery.of(context).size;
 
   return removeCartFunction == null
       ? Stack(
           children: [
             Container(
               margin: EdgeInsets.only(left: 1, right: 1),
-              height: 240,
-              width: 180,
+              height: size.height,
+              width: size.width / 2,
               child: GestureDetector(
                 onTap: () {
                   Route route = MaterialPageRoute(
                       builder: (c) => ProductPage(itemModel: model));
                   Navigator.push(context, route);
                 },
-                child: Card(
+                child: Container(
+                
+                  decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.circular(20)),
                   child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 0),
                       child: Column(
                         children: [
+                          Container(
+                                 child: GestureDetector(
+                                  onTap: () {
+                                    Route route = MaterialPageRoute(
+                                        builder: (c) => ProductPage(itemModel: model));
+                                    Navigator.push(context, route);
+                                  },
+
+                                ),
+                    height: size.height / 5,
+                    width: size.width / 2.2,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                      ),
+                      image: DecorationImage(
+                        image: NetworkImage(model.thumbnailUrl),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                  ),
                           Center(
                             child: Text(
                               model.title,
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          Spacer(),
+                         
                           Row(
                             children: [
-                              Spacer(),
+                            Spacer(),
                               Text(r"$",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold)),
                               Text("${model.price.toString()}.0",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold)),
                               Spacer(),
@@ -66,7 +95,7 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                   ? IconButton(
                                       icon: Icon(
                                         Icons.add_shopping_cart,
-                                        color: Colors.white,
+                                        color: Colors.black,
                                       ),
                                       onPressed: () {
                                         checkItemInCart(model.title, context);
@@ -77,7 +106,7 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                   : IconButton(
                                       icon: Icon(
                                         Icons.delete,
-                                        color: Colors.white,
+                                        color: Colors.black,
                                       ),
                                       onPressed: () {
                                         removeCartFunction();
@@ -93,39 +122,22 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                           )
                         ],
                       )),
-                  elevation: 3,
                   margin: EdgeInsets.only(top: 5, left: 10, right: 10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(45),
-                          bottomRight: Radius.circular(15),
-                          topLeft: Radius.circular(45),
-                          topRight: Radius.circular(45))),
                 ),
               ),
             ),
-            Positioned(
-                top: 50,
-                right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    Route route = MaterialPageRoute(
-                        builder: (c) => ProductPage(itemModel: model));
-                    Navigator.push(context, route);
-                  },
-                  child: Container(
-                    height: 160,
-                    width: 190,
-                    child: FadeInImage(
-                      image: NetworkImage(model.thumbnailUrl),
-                      placeholder: AssetImage("images/loading.png"),
-                      fadeInDuration: Duration(milliseconds: 50),
-                      width: 140.0,
-                      height: 140.0,
-                    ),
-                  ),
-                  // ),
-                ))
+            // Positioned(
+            //     top: 50,
+            //     right: 10,
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         Route route = MaterialPageRoute(
+            //             builder: (c) => ProductPage(itemModel: model));
+            //         Navigator.push(context, route);
+            //       },
+                  
+            //       // ),
+            //     ))
           ],
         )
       : Stack(
@@ -173,7 +185,7 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                             child: Text(
                                               model.title ?? '',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                   fontSize: 18.0,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -193,7 +205,7 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                             child: Text(
                                               model.shortInfo ?? '',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                   fontSize: 12.0),
                                             ),
                                           ),
@@ -221,12 +233,12 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                                     r"",
                                                     style: TextStyle(
                                                         fontSize: 18.0,
-                                                        color: Colors.white),
+                                                        color: Colors.black),
                                                   ),
                                                   Text(
                                                     r"$",
                                                     style: TextStyle(
-                                                        color: Colors.white,
+                                                        color: Colors.black,
                                                         fontSize: 18.0,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -236,7 +248,7 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                                         .toString(),
                                                     style: TextStyle(
                                                       fontSize: 18.0,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),
@@ -281,7 +293,7 @@ Widget sourceInfoBurger(ItemModel model, BuildContext context,
                                               : IconButton(
                                                   icon: Icon(
                                                     Icons.delete,
-                                                    color: Colors.white,
+                                                    color: Colors.black,
                                                   ),
                                                   onPressed: () {
                                                     removeCartFunction();
@@ -472,7 +484,7 @@ class _CantidadProductoState extends State<CantidadProducto> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
         border: Border.all(
-          color: Colors.white,
+          color: Colors.black,
           width: 2,
         ),
       ),
@@ -489,7 +501,7 @@ class _CantidadProductoState extends State<CantidadProducto> {
               child: IconButton(
                 icon: Icon(
                   Icons.remove,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 onPressed: () {
                   int min = widget.model.qtyitems;
@@ -511,7 +523,7 @@ class _CantidadProductoState extends State<CantidadProducto> {
               "${widget.model.qtyitems}",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -530,7 +542,7 @@ class _CantidadProductoState extends State<CantidadProducto> {
               child: IconButton(
                 icon: Icon(
                   Icons.add,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 onPressed: () {
                   int max = widget.model.qtyitems;
@@ -587,7 +599,8 @@ class _CantidadProductoState extends State<CantidadProducto> {
         .doc(widget.model.productId.toString())
         .update({
       "price": widget.model.price.toInt(),
-      "cartPrice": widget.model.price.toInt() * widget.model.qtyitems.toInt() -  widget.model.price.toInt(),
+      "cartPrice": widget.model.price.toInt() * widget.model.qtyitems.toInt() -
+          widget.model.price.toInt(),
       "qtyitems": widget.model.qtyitems.toInt() - 1,
     });
   }
@@ -600,7 +613,8 @@ class _CantidadProductoState extends State<CantidadProducto> {
         .doc(widget.model.productId.toString())
         .update({
       "price": widget.model.price.toInt(),
-      "cartPrice": widget.model.price.toInt() * widget.model.qtyitems.toInt() +  widget.model.price.toInt(),
+      "cartPrice": widget.model.price.toInt() * widget.model.qtyitems.toInt() +
+          widget.model.price.toInt(),
       "qtyitems": widget.model.qtyitems.toInt() + 1,
     });
   }

@@ -118,7 +118,7 @@ class _HamburgerState extends State<Hamburger> {
                             height: 240,
                             margin: EdgeInsets.only(top: 10),
                             child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 ItemModel model = ItemModel.fromJson(
                                     dataSnapshot.data.docs[index].data());
