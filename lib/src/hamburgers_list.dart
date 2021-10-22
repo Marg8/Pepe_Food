@@ -38,7 +38,8 @@ final Size size = MediaQuery.of(context).size;
                 child: Container(
                 
                   decoration: BoxDecoration(
-                      color: Colors.yellow,
+                      color: Colors.yellow.withOpacity(0.80),
+                     
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                       padding: const EdgeInsets.only(top: 0),
@@ -53,7 +54,7 @@ final Size size = MediaQuery.of(context).size;
                                   },
 
                                 ),
-                    height: size.height / 5,
+                    height: size.height / 3.5,
                     width: size.width / 2.2,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
@@ -67,6 +68,7 @@ final Size size = MediaQuery.of(context).size;
                     ),
                   ),
                           Center(
+                            
                             child: Text(
                               model.title,
                               style: TextStyle(
@@ -76,10 +78,10 @@ final Size size = MediaQuery.of(context).size;
                               textAlign: TextAlign.center,
                             ),
                           ),
-                         
+                         Spacer(),
                           Row(
                             children: [
-                            Spacer(),
+                          Spacer(),
                               Text(r"$",
                                   style: TextStyle(
                                       color: Colors.black,
@@ -88,41 +90,14 @@ final Size size = MediaQuery.of(context).size;
                               Text("${model.price.toString()}.0",
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 15,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold)),
-                              Spacer(),
-                              removeCartFunction == null
-                                  ? IconButton(
-                                      icon: Icon(
-                                        Icons.add_shopping_cart,
-                                        color: Colors.black,
-                                      ),
-                                      onPressed: () {
-                                        checkItemInCart(model.title, context);
-                                        checkProductIdinCart(
-                                            model.title, model, context);
-                                      },
-                                    )
-                                  : IconButton(
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.black,
-                                      ),
-                                      onPressed: () {
-                                        removeCartFunction();
-
-                                        //opcional para salir automatico
-
-                                        Route route = MaterialPageRoute(
-                                            builder: (c) => Hamburger());
-                                        Navigator.push(context, route);
-                                      },
-                                    ),
+                             SizedBox(width: 5,)
                             ],
                           )
                         ],
                       )),
-                  margin: EdgeInsets.only(top: 5, left: 10, right: 10),
+                  margin: EdgeInsets.only(top: 25, left: 10, right: 10),
                 ),
               ),
             ),

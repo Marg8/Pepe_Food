@@ -211,7 +211,7 @@ class _AddAddressState extends State<AddAddress> {
 
   Container buildCodigoPostal() {
     return Container(
-      width: 200,
+      width: 230,
       padding: EdgeInsets.only(left: 15, right: 15, top: 5),
       color: Colors.white,
       child: Row(
@@ -304,7 +304,7 @@ class _AddAddressState extends State<AddAddress> {
   Container buildCosto() {
     
     return Container(
-      width: 200,
+      width: 230,
       padding: EdgeInsets.only(left: 15, right: 15, top: 5),
       color: Colors.white,
       child: Row(
@@ -448,7 +448,7 @@ class _AddAddressState extends State<AddAddress> {
   String _colonia;
   List coloniaList;
   Future<String> _getColoniaList() async {
-    await rootBundle.loadString("json/addressdata.json").then((response) {
+    await rootBundle.loadString("json/address.json").then((response) {
       Map datos = json.decode(response);
 
       setState(() {
@@ -460,7 +460,7 @@ class _AddAddressState extends State<AddAddress> {
   String _costo;
   List costoList;
   Future<String> _getCostoList() async {
-    await rootBundle.loadString("json/addressdatacost.json").then((response) {
+    await rootBundle.loadString("json/address.json").then((response) {
       Map datos = json.decode(response);
 
       setState(() {

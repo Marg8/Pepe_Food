@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
             cardColor: Colors.white,
-            appBarTheme: AppBarTheme(color: Colors.yellow, centerTitle: true),
+            appBarTheme: AppBarTheme(color: Colors.white, centerTitle: true),
             bottomAppBarColor: Colors.yellow,
             floatingActionButtonTheme:
                 FloatingActionButtonThemeData(backgroundColor: Colors.black)),
@@ -115,10 +115,10 @@ class _HamburgerState extends State<Hamburger> {
                       )
                     : SliverToBoxAdapter(
                         child: Container(
-                            height: 240,
+                            height: 300,
                             margin: EdgeInsets.only(top: 10),
                             child: ListView.builder(
-                              scrollDirection: Axis.vertical,
+                              scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 ItemModel model = ItemModel.fromJson(
                                     dataSnapshot.data.docs[index].data());
@@ -151,7 +151,7 @@ class _HamburgerState extends State<Hamburger> {
               Spacer(),
               Spacer(),
               IconButton(
-                  icon: Icon(Icons.turned_in),
+                  icon: Icon(Icons.location_on),
                   color: Colors.black,
                   onPressed: () {
                     _mostrarAlerta(context);

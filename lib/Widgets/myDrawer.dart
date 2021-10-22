@@ -27,24 +27,26 @@ class MyDrawer extends StatelessWidget {
               ),
              child: Column(
                children: [
-                 Material(
-                   borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                   elevation: 8.0,
-                   child: Container(
-                     height: 160.0,
-                       width: 160.0,
-                    //  child: CircleAvatar(
-                    //    backgroundImage: NetworkImage(
-                    //      EcommerceApp.sharedPreferences.getString(EcommerceApp.userAvatarUrl),
-                    //    ),
-                    //  ),
-                   ),
-                 ),
+                
                  SizedBox(height: 10.0,),
-                //  Text(
-                //    EcommerceApp.sharedPreferences.getString(EcommerceApp.userName),
-                //    style: TextStyle(color: Colors.black, fontSize: 35.0, fontFamily: "Signatra"),
-                //  ),
+                 Text("Don Pepe Food",
+                   style: TextStyle(color: Colors.black, fontSize: 35.0, fontFamily: "Signatra"),
+                 ),
+
+                 Container(
+                   width: 100,
+                   height: 100,
+                   decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage("images/mini-van.png"),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                 )
                ],
               ),
             ),
@@ -73,25 +75,25 @@ class MyDrawer extends StatelessWidget {
                    ),
                    Divider(height: 10.0, color: Colors.black, thickness: 4.0,),
 
-                   ListTile(
-                     leading: Icon(Icons.reorder, color: Colors.black,),
-                     title: Text("Mis Ordenes", style: TextStyle(color: Colors.black),),
-                     onTap: (){
-                       Route route = MaterialPageRoute(builder: (c) => MyOrders());
-                       Navigator.push(context, route);
-                     },
-                   ),
-                   Divider(height: 10.0, color: Colors.black, thickness: 4.0,),
+                  //  ListTile(
+                  //    leading: Icon(Icons.reorder, color: Colors.black,),
+                  //    title: Text("Mis Ordenes", style: TextStyle(color: Colors.black),),
+                  //    onTap: (){
+                  //      Route route = MaterialPageRoute(builder: (c) => MyOrders());
+                  //      Navigator.push(context, route);
+                  //    },
+                  //  ),
+                  //  Divider(height: 10.0, color: Colors.black, thickness: 4.0,),
 
-                   ListTile(
-                     leading: Icon(Icons.shopping_cart, color: Colors.black,),
-                     title: Text("Mi Carrito", style: TextStyle(color: Colors.black),),
-                     onTap: (){
-                       Route route = MaterialPageRoute(builder: (c) => CartPage());
-                       Navigator.push(context, route);
-                     },
-                   ),
-                   Divider(height: 10.0, color: Colors.black, thickness: 4.0,),
+                  //  ListTile(
+                  //    leading: Icon(Icons.shopping_cart, color: Colors.black,),
+                  //    title: Text("Mi Carrito", style: TextStyle(color: Colors.black),),
+                  //    onTap: (){
+                  //      Route route = MaterialPageRoute(builder: (c) => CartPage());
+                  //      Navigator.push(context, route);
+                  //    },
+                  //  ),
+                  //  Divider(height: 10.0, color: Colors.black, thickness: 4.0,),
 
                    ListTile(
                      leading: Icon(Icons.search, color: Colors.black,),

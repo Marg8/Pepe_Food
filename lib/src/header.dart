@@ -40,12 +40,26 @@ class _HeaderState extends State<Header> {
                   
                   children: [
                     SizedBox(height: 20,),
-                    Text("Donde Estoy?",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                    Text("Donde esta Don Pepe?",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                     Text(
-                      "En:",
+                      "En: JCI Planta 1",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
+                    Container(
+                   width: 70,
+                   height: 50,
+                   decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage("images/mini-van.png"),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                 ),
                     Row(
                       children: [
                         SizedBox(height: 20,),
