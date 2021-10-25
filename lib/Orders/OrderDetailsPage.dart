@@ -295,46 +295,29 @@ class ShippingDetails extends StatelessWidget {
             children: [
               TableRow(children: [
                 KeyText(
-                  msg: "Nombre",
+                  msg: "Locacion",
                 ),
-                Text(model.name),
+                Text(model.locacion),
               ]),
               TableRow(children: [
                 KeyText(
-                  msg: "Numero de Celular",
+                  msg: "Colonia",
                 ),
-                Text(model.phoneNumber),
-              ]),
-              TableRow(children: [
-                KeyText(
-                  msg: "Direccion",
-                ),
-                Text(model.flatNumber),
-              ]),
-              TableRow(children: [
-                KeyText(
-                  msg: "Costo",
-                ),
-                Text("\$ ${model.cost.toString()} MXN"),
+                Text(model.colonia),
               ]),
               TableRow(children: [
                 KeyText(
                   msg: "Ciudad",
                 ),
-                Text(model.city),
+                Text(model.colonia),
               ]),
               TableRow(children: [
                 KeyText(
-                  msg: "Estado, Pais",
+                  msg: "Estado",
                 ),
-                Text(model.state),
+                Text(model.estado),
               ]),
-              TableRow(children: [
-                KeyText(
-                  msg: "Codigo Postal",
-                ),
-                Text(model.pincode),
-              ]),
+              
             ],
           ),
         ),

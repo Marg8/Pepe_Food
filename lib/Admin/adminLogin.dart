@@ -1,3 +1,4 @@
+import 'package:pepe_food/Admin/homePage.Admin.dart';
 import 'package:pepe_food/Admin/uploadItems.dart';
 import 'package:pepe_food/Authentication/authenication.dart';
 import 'package:pepe_food/DialogBox/errorDialog.dart';
@@ -166,7 +167,7 @@ class _AdminSignInScreenState extends State<AdminSignInScreen>
               _adminIDTextEditingController.text = "";
               _passwordTextEditingController.text = "";
             });
-            Route route = MaterialPageRoute(builder: (c) => UploadPage());
+            Route route = MaterialPageRoute(builder: (c) => HomeAdmin());
             Navigator.push(context, route);
           }
       });

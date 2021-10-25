@@ -41,10 +41,22 @@ class _HeaderState extends State<Header> {
                   children: [
                     SizedBox(height: 20,),
                     Text("Donde esta Don Pepe?",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-                    Text(
-                      "En: JCI Planta 1",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "En: ",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                        Text(
+                          "JCI Planta 1",
+                          style:
+                              TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.blueGrey),
+                        ),
+                      ],
                     ),
                     Container(
                    width: 70,

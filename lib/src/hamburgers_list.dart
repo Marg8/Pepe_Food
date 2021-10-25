@@ -67,15 +67,18 @@ final Size size = MediaQuery.of(context).size;
                       )
                     ),
                   ),
-                          Center(
-                            
-                            child: Text(
-                              model.title,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Center(
+                              
+                              child: Text(
+                                model.title,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                          Spacer(),

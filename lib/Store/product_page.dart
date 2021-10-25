@@ -1,3 +1,4 @@
+import 'package:pepe_food/Address/address.dart';
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Counters/cartitemcounter.dart';
 import 'package:pepe_food/Models/item.dart';
@@ -19,7 +20,7 @@ TextEditingController _notaTextEditingController = TextEditingController();
 
 class ProductPage extends StatefulWidget {
   final ItemModel itemModel;
-  
+
   ProductPage({this.itemModel});
 
   @override
@@ -34,9 +35,10 @@ class _ProductPageState extends State<ProductPage> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            actions: [
-              AgregadosCompras(),
-            ],
+            title: Text(
+              "Producto",
+              style: TextStyle(color: Colors.black),
+            ),
           ),
           body: buildListView(context)),
     );
@@ -49,7 +51,7 @@ class _ProductPageState extends State<ProductPage> {
         Container(
           padding: const EdgeInsets.only(top: 0, bottom: 0, left: 8, right: 8),
           width: MediaQuery.of(context).size.width,
-          color: Colors.yellow,
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -133,11 +135,11 @@ class _InofrmacionProductoState extends State<InofrmacionProducto> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.star, color: Colors.white),
-              Icon(Icons.star, color: Colors.white),
-              Icon(Icons.star, color: Colors.white),
-              Icon(Icons.star, color: Colors.white),
-              Icon(Icons.star, color: Colors.white),
+              Icon(Icons.star, color: Colors.black),
+              Icon(Icons.star, color: Colors.black),
+              Icon(Icons.star, color: Colors.black),
+              Icon(Icons.star, color: Colors.black),
+              Icon(Icons.star, color: Colors.black),
             ],
           )
         ],
@@ -172,7 +174,7 @@ class _MultipleOptionsState extends State<MultipleOptions> {
         topLeft: Radius.circular(40),
         topRight: Radius.circular(40),
       ),
-      color: Colors.white,
+      color: Colors.grey.shade100,
       elevation: 0,
       child: Padding(
         padding:
@@ -203,22 +205,13 @@ class _MultipleOptionsState extends State<MultipleOptions> {
             ),
             SizedBox(height: 70),
 
-            buildExtras(),
-            SizedBox(height: 20.0),
-
-            buildNota(),
-            SizedBox(height: 20.0),
-
             //controls
             Row(
               children: <Widget>[
                 Expanded(
                   child: InkWell(
                       onTap: () {
-                        checkItemInCart(widget.widget.itemModel.title, context);
-
-                        checkProductIdinCart2(widget.widget.itemModel.title,
-                            widget.widget.itemModel, context);
+                        _mostrarAlerta(context);
                       },
                       child: AddToCartBottom()),
                 ),
@@ -349,16 +342,16 @@ class AddToCartBottom extends StatelessWidget {
         width: 150,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.orange, width: 2),
+          border: Border.all(color: Colors.black, width: 2),
           borderRadius: BorderRadius.circular(48),
           gradient: LinearGradient(
-            colors: [Colors.orange, Colors.orange],
+            colors: [Colors.yellowAccent, Colors.yellow],
           ),
         ),
         child: Text(
-          "Agregar Compra",
+          "Enviar notificacion",
           style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+              color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),
@@ -403,7 +396,7 @@ class AddToCartBottom extends StatelessWidget {
 //               child: IconButton(
 //                 icon: Icon(
 //                   Icons.remove,
-//                   color: Colors.white,
+//                   color: Colors.black,
 //                 ),
 //                 onPressed: () {
 //                   setState(() {
@@ -431,7 +424,7 @@ class AddToCartBottom extends StatelessWidget {
 //               child: IconButton(
 //                 icon: Icon(
 //                   Icons.add,
-//                   color: Colors.white,
+//                   color: Colors.black,
 //                 ),
 //                 onPressed: () {
 //                   setState(() {
@@ -486,10 +479,55 @@ class Avatar extends StatelessWidget {
 }
 
 const boldTextStyle =
-    TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white);
+    TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black);
 const boldTextStyle1 =
-    TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white);
+    TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black);
 const boldTextStyle2 =
     TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black);
 const largeTextStyle =
     TextStyle(fontWeight: FontWeight.normal, fontSize: 20, color: Colors.black);
+
+void _mostrarAlerta(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text("Enviar Mensaje"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                  "Se enviara mensaje a Don Pepe para llegar a tu locacion...."),
+              SizedBox(height: 15),
+              Container(
+                width: 100,
+                height: 70,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    image: DecorationImage(
+                        image: AssetImage("images/mini-van.png"),
+                        fit: BoxFit.cover)),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancelar"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Route route = MaterialPageRoute(builder: (c) => Address());
+                  Navigator.push(context, route);
+                }),
+          ]);
+    },
+  );
+}

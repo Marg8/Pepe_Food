@@ -57,15 +57,12 @@ class _AddAddressState extends State<AddAddress> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            if (formKey.currentState.validate()) {
+            if (_codigoPostal.isNotEmpty) {
               final model = AddressModel(
-                name: cName.text.trim(),
-                state: _estado.toString(),
-                pincode: _codigoPostal.toString(),
-                cost: double.parse(_costo),
-                phoneNumber: cPhoneNumber.text,
-                flatNumber: cFlatHomeNumber.text,
-                city: _ciudad.toString(),
+                locacion: _codigoPostal.toString(),
+                colonia: _colonia.toString(),
+                ciudad: _ciudad.toString(),
+                estado: _estado.toString(),
                 addressID: DateTime.now().millisecondsSinceEpoch.toString(),
               ).toJson();
 
@@ -86,7 +83,7 @@ class _AddAddressState extends State<AddAddress> {
                 //No se necesita esta linea Cuando se implementa ScaffoldMessenger
                 //scaffoldMessengerKey.currentState.showSnackBar(snack1);
                 FocusScope.of(context).requestFocus(FocusNode());
-                formKey.currentState.reset();
+                
               });
             }
           },
@@ -98,28 +95,19 @@ class _AddAddressState extends State<AddAddress> {
           children: [
             Column(
               children: <Widget>[
-                AddInput(
-                  formKey: formKey,
-                  cName: cName,
-                  cPhoneNumber: cPhoneNumber,
-                  cFlatHomeNumber: cFlatHomeNumber,
-                  cCity: cCity,
-                  cState: cState,
-                  cPinCode: cPinCode,
-                  cCost: cCost,
-                ),
+               
                 Row(
                   children: [
-                    buildInputoCode(),
+                   
                     buildCodigoPostal(),
                   ],
                 ),
-                buildButtonCP(),
+               
                 SizedBox(
                   height: 5,
                 ),
                 buildColonia(),
-                buildCosto(),
+                
                 SizedBox(
                   height: 5,
                 ),
@@ -136,78 +124,37 @@ class _AddAddressState extends State<AddAddress> {
     );
   }
 
-  Widget buildButtonCP() {
-    return Container(
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(
-          colors: [Colors.transparent, Colors.transparent],
-          begin: const FractionalOffset(0.0, 0.0),
-          end: const FractionalOffset(1.0, 0.0),
-          stops: [0.0, 1.0],
-          tileMode: TileMode.clamp,
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            //Icon(Icons.shop_two, color: Colors.black, size: 80.0,),
-            Padding(
-              padding: EdgeInsets.only(top: 0.0),
-              child: ElevatedButton(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.g_translate),
-                    Text(
-                      "Buscar Codigo Postal",
-                      style: TextStyle(fontSize: 15.0, color: Colors.white),
-                    ),
-                  ],
-                ),
-                // color: Colors.black,
-                onPressed: () {
-                  launch(
-                      "https://www.google.com/search?q=codigo+postal+zona+centro+matamoros&sxsrf=ALeKk0165kbzk-vF8i43ij05wNiVJVmsKw%3A1621737472593&ei=AMCpYP6-I9O5tAauqYn4Aw&oq=codigo+postal+zona+centro&gs_lcp=Cgdnd3Mtd2l6EAEYAjICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMggIABDHARCvATICCAA6BwgjELADECc6BwgAEEcQsANQiVBY5Fxgmm1oAXACeACAAV-IAZcIkgECMTKYAQCgAQGqAQdnd3Mtd2l6yAEJwAEB&sclient=gws-wiz");
-                },
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
-  Widget buildInputoCode() {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Container(
-        width: 150,
-        child: TextFormField(
-          textCapitalization: TextCapitalization.sentences,
-          validator: (val) =>
-              val.isEmpty ? "No Puede Dejar Campos Vacios" : null,
-          onFieldSubmitted: (valor) {
-            setState(() {
-              _codigoPostal = valor;
-              print(_codigoPostal);
-              _getColoniaList();
-              _getCostoList();
-              _colonia = null;
-              _costo = null;
-            });
-          },
-          decoration: InputDecoration(
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-            hintText: "87413",
-            labelText: "CP",
-            suffixIcon: Icon(Icons.filter_center_focus_rounded),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget buildInputoCode() {
+  //   return Padding(
+  //     padding: EdgeInsets.all(8.0),
+  //     child: Container(
+  //       width: 150,
+  //       child: TextFormField(
+  //         textCapitalization: TextCapitalization.sentences,
+  //         validator: (val) =>
+  //             val.isEmpty ? "No Puede Dejar Campos Vacios" : null,
+  //         onFieldSubmitted: (valor) {
+  //           setState(() {
+  //             _codigoPostal = valor;
+  //             print(_codigoPostal);
+  //             _getColoniaList();
+  //             _getCostoList();
+  //             _colonia = null;
+  //             _costo = null;
+  //           });
+  //         },
+  //         decoration: InputDecoration(
+  //           border:
+  //               OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+  //           hintText: "87413",
+  //           labelText: "CP",
+  //           suffixIcon: Icon(Icons.filter_center_focus_rounded),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Container buildCodigoPostal() {
     return Container(
@@ -229,14 +176,13 @@ class _AddAddressState extends State<AddAddress> {
                     color: Colors.black54,
                     fontSize: 16,
                   ),
-                  hint: Text('Codigo Postal'),
+                  hint: Text('Locacion'),
                   onChanged: (String newValue) {
                     setState(() {
-                      _colonia = null;
-                      _costo = null;
+                     
+                     
                       _codigoPostal = newValue;
-                      _getColoniaList();
-                      _getCostoList();
+                 
                       print(_codigoPostal);
                     });
                   },
@@ -257,7 +203,7 @@ class _AddAddressState extends State<AddAddress> {
   }
 
   Container buildColonia() {
-    return Container(
+   return Container(
       padding: EdgeInsets.only(left: 15, right: 15, top: 5),
       color: Colors.white,
       child: Row(
@@ -279,16 +225,14 @@ class _AddAddressState extends State<AddAddress> {
                   onChanged: (String newValue) {
                     setState(() {
                       _colonia = newValue;
-
                       print(_colonia);
-                      // _getCiudadList();
+                      // _getEstadoList();
                     });
                   },
                   items: coloniaList?.map((item) {
                         return new DropdownMenuItem(
-                          child:
-                              new Text(item["Nombre Asentamiento"].toString()),
-                          value: item["Nombre Asentamiento"].toString(),
+                          child: new Text("Parque Las Ventanas".toString()),
+                          value: "Parque Las Ventanas".toString(),
                         );
                       })?.toList() ??
                       [],
@@ -301,52 +245,6 @@ class _AddAddressState extends State<AddAddress> {
     );
   }
 
-  Container buildCosto() {
-    
-    return Container(
-      width: 230,
-      padding: EdgeInsets.only(left: 15, right: 15, top: 5),
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: DropdownButtonHideUnderline(
-              child: ButtonTheme(
-                alignedDropdown: true,
-                child: DropdownButton<String>(
-                  value: _costo,
-                  iconSize: 30,
-                  icon: (null),
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
-                  ),
-                  hint: Text('Costo de Envio'),
-                  onChanged: (String newValueC) {
-                    setState(() {
-                      
-                      _costo = newValueC;
-                      
-                      
-                      print(_costo);
-                    });
-                  },
-                  items: costoList?.map((item) {
-                        return new DropdownMenuItem(
-                          child: new Text(item["Costo"].toString()),
-                          value: item["Costo"].toString(),
-                        );
-                      })?.toList() ??
-                      [],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Container buildCiudad() {
     return Container(
@@ -445,17 +343,17 @@ class _AddAddressState extends State<AddAddress> {
     });
   }
 
-  String _colonia;
-  List coloniaList;
-  Future<String> _getColoniaList() async {
-    await rootBundle.loadString("json/address.json").then((response) {
-      Map datos = json.decode(response);
+  // String _colonia;
+  // List coloniaList;
+  // Future<String> _getColoniaList() async {
+  //   await rootBundle.loadString("json/address.json").then((response) {
+  //     Map datos = json.decode(response);
 
-      setState(() {
-        coloniaList = datos[_codigoPostal];
-      });
-    });
-  }
+  //     setState(() {
+  //       coloniaList = datos[_codigoPostal];
+  //     });
+  //   });
+  // }
 
   String _costo;
   List costoList;
@@ -480,6 +378,8 @@ class _AddAddressState extends State<AddAddress> {
   //     });
   //   });
   // }
+  String _colonia = "Parque Las Ventanas";
+  List coloniaList = ["Parque Las ventanas"];
 
   String _estado = "Tamaulipas, Mex.";
   List estadoList = ["Tamaulipas, Mex."];

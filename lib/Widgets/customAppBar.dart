@@ -28,9 +28,9 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       centerTitle: true,
       title: Text(
-        "Chiken-Mac",
+        "Pepe Food",
         style: TextStyle(
-            fontSize: 55.0, color: Colors.white, fontFamily: "Signatra"),
+            fontSize: 55.0, color: Colors.black, fontFamily: "Signatra"),
       ),
       bottom: bottom,
       actions: [
@@ -58,26 +58,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
 
                   //Video 11 o 19
                   //falta determinar la funcion de este indicador
-                  Positioned(
-                    top: 3.0,
-                    bottom: 4.0,
-                    left: 5.8,
-                    child: Consumer<CartItemCounter>(
-                      builder: (context, counter, _) {
-                        return Text(
-                          (EcommerceApp.sharedPreferences
-                                      .getStringList(EcommerceApp.userCartList)
-                                      .length -
-                                  1)
-                              .toString(),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold),
-                        );
-                      },
-                    ),
-                  ),
+                 
                 ],
               ),
             )

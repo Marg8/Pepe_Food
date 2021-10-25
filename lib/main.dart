@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:pepe_food/Address/address.dart';
 import 'dart:async';
 import 'package:pepe_food/Counters/orderNumberProvider.dart';
 import 'package:pepe_food/Authentication/authenication.dart';
@@ -73,6 +75,7 @@ class _HamburgerState extends State<Hamburger> {
   Widget build(BuildContext context) {
     final newsService = Provider.of<NewsService>(context, listen: false);
     print(newsService.selectedCategory);
+    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: CustomScrollView(
@@ -115,7 +118,7 @@ class _HamburgerState extends State<Hamburger> {
                       )
                     : SliverToBoxAdapter(
                         child: Container(
-                            height: 300,
+                            height: size.height / 2.5,
                             margin: EdgeInsets.only(top: 10),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -143,10 +146,10 @@ class _HamburgerState extends State<Hamburger> {
             children: [
               Spacer(),
               IconButton(
-                  icon: Icon(Icons.add_alert),
+                  icon: Icon(Icons.phone),
                   color: Colors.black,
                   onPressed: () {
-                    _mostrarAlerta(context);
+                    _mostrarAlerta1(context);
                   }),
               Spacer(),
               Spacer(),
@@ -174,14 +177,25 @@ void _mostrarAlerta(BuildContext context) {
       return AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          title: Text("Titulo"),
+          title: Text("Enviar Mensaje"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text("Contenido de prueba de contenedor...."),
-              FlutterLogo(
-                size: 100.0,
-              )
+              Text(
+                  "Se enviara mensaje a Don Pepe para llegar a tu locacion...."),
+              SizedBox(height: 15),
+              Container(
+                width: 100,
+                height: 70,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    image: DecorationImage(
+                        image: AssetImage("images/mini-van.png"),
+                        fit: BoxFit.cover)),
+              ),
             ],
           ),
           actions: <Widget>[
@@ -190,9 +204,57 @@ void _mostrarAlerta(BuildContext context) {
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: Text("OK"),
+                child: Text("OK"),
+                onPressed: () {
+                  Route route = MaterialPageRoute(builder: (c) => Address());
+                  Navigator.push(context, route);
+                }),
+          ]);
+    },
+  );
+}
+
+void _mostrarAlerta1(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Center(child: Text("Llamar a Don Pepe")),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.phone_android_outlined),
+                  Text("8682-99-58-03"),
+                ],
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: 100,
+                height: 70,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    image: DecorationImage(
+                        image: AssetImage("images/mini-van.png"),
+                        fit: BoxFit.cover)),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancelar"),
               onPressed: () => Navigator.of(context).pop(),
             ),
+            TextButton(
+                child: Text("Llamar"),
+                 onPressed: () => FlutterPhoneDirectCaller.callNumber("8689032956")),
           ]);
     },
   );

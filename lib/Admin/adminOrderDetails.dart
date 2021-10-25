@@ -291,39 +291,27 @@ class AdminShippingDetails extends StatelessWidget {
             children: [
               TableRow(children: [
                 KeyText(
-                  msg: "Name",
+                  msg: "Locacion",
                 ),
-                Text(model.name),
+                Text(model.locacion),
               ]),
               TableRow(children: [
                 KeyText(
-                  msg: "Phone Number",
+                  msg: "Colonia",
                 ),
-                Text(model.phoneNumber),
+                Text(model.colonia),
               ]),
               TableRow(children: [
                 KeyText(
-                  msg: "Flat Number",
+                  msg: "Ciudad",
                 ),
-                Text(model.flatNumber),
+                Text(model.colonia),
               ]),
               TableRow(children: [
                 KeyText(
-                  msg: "City",
+                  msg: "Estado",
                 ),
-                Text(model.city),
-              ]),
-              TableRow(children: [
-                KeyText(
-                  msg: "State",
-                ),
-                Text(model.state),
-              ]),
-              TableRow(children: [
-                KeyText(
-                  msg: "Pin code",
-                ),
-                Text(model.pincode),
+                Text(model.estado),
               ]),
             ],
           ),

@@ -1,45 +1,33 @@
 class AddressModel {
-  String name;
-  String phoneNumber;
-  String flatNumber;
-  String city;
-  String state;
-  String pincode;
+  String locacion;
+  String colonia;
+  String ciudad;
+  String estado;
   String addressID;
-  double cost;
 
-  AddressModel(
-      {this.name,
-      this.phoneNumber,
-      this.flatNumber,
-      this.city,
-      this.state,
-      this.pincode,
-      this.addressID,
-      this.cost,
-      });
+  AddressModel({
+    this.locacion,
+    this.colonia,
+    this.ciudad,
+    this.estado,
+    this.addressID
+  });
 
   AddressModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    phoneNumber = json['phoneNumber'];
-    flatNumber = json['flatNumber'];
-    city = json['city'];
-    state = json['state'];
-    pincode = json['pincode'];
-    addressID = json["adressID"];
-    cost = json["cost"];
+    locacion = json['locacion'];
+    colonia = json['colonia'];
+    ciudad = json['ciudad'];
+    estado = json['estado'];
+    addressID = json['addressID'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['phoneNumber'] = this.phoneNumber;
-    data['flatNumber'] = this.flatNumber;
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['pincode'] = this.pincode;
-    data["adressID"] = this.addressID;
-    data["cost"] = this.cost;
+    data['locacion'] = this.locacion;
+    data['colonia'] = this.colonia;
+    data['ciudad'] = this.ciudad;
+    data['estado'] = this.estado;
+    data['addressID'] = this.addressID;
     return data;
   }
 }

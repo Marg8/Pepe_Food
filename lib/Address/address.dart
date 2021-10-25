@@ -35,7 +35,7 @@ class _AddressState extends State<Address> {
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "Selecciona Direccion de Entrega",
+                  "Selecciona tu locacion",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class _AddressState extends State<Address> {
                                       currentIndex: address.count,
                                       value: index,
                                       addressId: snapshot.data.docs[index].id,
-                                      totalAmount: widget.totalAmount,
+                                      
                                       
                                       model: AddressModel.fromJson(
                                           snapshot.data.docs[index].data()),
@@ -84,7 +84,7 @@ class _AddressState extends State<Address> {
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-          label: Text("Agregar Nueva Direccion"),
+          label: Text("Agregar Nueva Locacion"),
           backgroundColor: Colors.black,
           icon: Icon(Icons.add_location),
           onPressed: () {
@@ -183,46 +183,30 @@ class _AddressCardState extends State<AddressCard> {
                           children: [
                             TableRow(children: [
                               KeyText(
-                                msg: "Nombre Completo",
+                                msg: "Locacion",
                               ),
-                              Text(widget.model.name),
+                              Text(widget.model.locacion),
                             ]),
                             TableRow(children: [
                               KeyText(
-                                msg: "Numero de Celular",
+                                msg: "Colonia",
                               ),
-                              Text(widget.model.phoneNumber),
-                            ]),
-                            TableRow(children: [
-                              KeyText(
-                                msg: "Direcion",
-                              ),
-                              Text(widget.model.flatNumber),
-                            ]),
-                            TableRow(children: [
-                              KeyText(
-                                msg: "Costo de Envio",
-                              ),
-                              Text("\$ ${widget.model.cost.toString()} MXN"),
+                              Text(widget.model.colonia),
                             ]),
                             TableRow(children: [
                               KeyText(
                                 msg: "Ciudad",
                               ),
-                              Text(widget.model.city),
+                              Text(widget.model.ciudad),
                             ]),
+                         
                             TableRow(children: [
                               KeyText(
-                                msg: "Estado, Pais",
+                                msg: "Estado",
                               ),
-                              Text(widget.model.state),
+                              Text(widget.model.estado),
                             ]),
-                            TableRow(children: [
-                              KeyText(
-                                msg: "Codigo Postal",
-                              ),
-                              Text(widget.model.pincode),
-                            ]),
+                       
                           ],
                         ),
                       ),
@@ -232,13 +216,12 @@ class _AddressCardState extends State<AddressCard> {
               ),
               widget.value == Provider.of<AddressChanger>(context).count
                   ? WideButton(
-                      message: "Proceed",
+                      message: "Confirmar",
                       onPressed: () {
                         Route route = MaterialPageRoute(
                             builder: (c) => PaymentPage(
                                   addressId: widget.addressId,
-                                  totalAmount: widget.totalAmount,
-                                  cost: widget.model.cost,
+                                  
                                 ));
                         Navigator.push(context, route);
                       },
