@@ -163,10 +163,10 @@ class _AdminSignInScreenState extends State<AdminSignInScreen>
           {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Welcome Big Boss." + result.data()["name"]),));
 
-            setState(() {
-              _adminIDTextEditingController.text = "";
-              _passwordTextEditingController.text = "";
-            });
+            // setState(() {
+            //   _adminIDTextEditingController.text = "";
+            //   _passwordTextEditingController.text = "";
+            // });
             Route route = MaterialPageRoute(builder: (c) => HomeAdmin());
             Navigator.push(context, route);
           }

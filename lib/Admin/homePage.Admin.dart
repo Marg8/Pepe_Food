@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:pepe_food/Admin/adminShifOrders1.dart';
 import 'package:pepe_food/Admin/updateItems.dart';
 import 'package:pepe_food/Models/item.dart';
@@ -23,16 +25,7 @@ class _HomeAdminState extends State<HomeAdmin>
     with AutomaticKeepAliveClientMixin<HomeAdmin> {
   bool get wantKeepAlive => true;
   File file;
-  TextEditingController _descriptionTextEditingController =
-      TextEditingController();
-  TextEditingController _priceTextEditingController = TextEditingController();
-  TextEditingController _titleTextEditingController = TextEditingController();
-  TextEditingController _shortInfoTextEditingController =
-      TextEditingController();
-  TextEditingController _qtyitemsTextEditingController =
-      TextEditingController();
-  TextEditingController _categoryTextEditingController =
-      TextEditingController();
+
   String productId = DateTime.now().millisecondsSinceEpoch.toString();
   bool uploading = false;
   final ImagePicker pickerImg = ImagePicker();
@@ -50,7 +43,6 @@ class _HomeAdminState extends State<HomeAdmin>
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
-    
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -60,7 +52,7 @@ class _HomeAdminState extends State<HomeAdmin>
           flexibleSpace: Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(
-                colors: [Colors.yellow, Colors.yellow],
+                colors: [Colors.white, Colors.white],
                 begin: const FractionalOffset(0.0, 0.0),
                 end: const FractionalOffset(1.0, 0.0),
                 stops: [0.0, 1.0],
@@ -96,25 +88,145 @@ class _HomeAdminState extends State<HomeAdmin>
         ),
         body: BodyHome());
   }
-
-  
-
-  
 }
 
-class BodyHome extends StatelessWidget {
-  const BodyHome({
-    Key key,
-  }) : super(key: key);
+class BodyHome extends StatefulWidget {
+  @override
+  State<BodyHome> createState() => _BodyHomeState();
+}
+
+class _BodyHomeState extends State<BodyHome> {
+  get myLocacion => _locacion != null ? _locacion : "" ;
+
+  @override
+  void initState() {
+    _getLocacion();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 100,
-      child: Text("Mi Locacion",style: TextStyle(color: Colors.black),),
+    final Size size = MediaQuery.of(context).size;
+
+    return Column(
+      children: [
+        MyLocation(size),
+        Container(
+          color: Colors.grey,
+          height: 200,
+          width: size.width,
+          child: Text(
+            "Lista de Requerimiento",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        Container(
+          color: Colors.brown,
+          height: 200,
+          width: size.width,
+          child: Text(
+            "Pagina de productos",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+      ],
     );
   }
+
+  Container MyLocation(Size size) {
+    return Container(margin: EdgeInsets.all(0),padding: EdgeInsets.all(0),
+      decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("images/test1.jpg"),fit: BoxFit.cover),
+          ),
+                height: 200,
+      width: size.width,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Elegir mi Locacion",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+          ),
+          Row(
+            children: [
+              Container(
+                width: 240,
+                padding: EdgeInsets.only(left: 0, right: 15, top: 5),
+                color: Colors.transparent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Expanded(
+                      child: DropdownButtonHideUnderline(
+                        child: ButtonTheme(disabledColor: null,
+                          alignedDropdown: true,
+                          child: DropdownButton<String>(
+                                                       value: _locacion,
+                            iconSize: 30,
+                            icon: (null),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                            ),
+                            hint: Text('Locacion'),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                _locacion = newValue;
+
+                                print(_locacion);
+                              });
+                            },
+                            items: getOption?.map((item) {
+                                  return new DropdownMenuItem(
+                                    child:
+                                        new Text(item["Location"].toString()),
+                                    value: item["Location"].toString(),
+                                  );
+                                })?.toList() ??
+                                [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  "images/mini-van.png",
+                  height: 100.0,
+                  width: 140.0,
+                ),
+              ),
+            ],
+          ),
+          Spacer(),
+          Text(
+            "Los Clientes Saben que estas en $myLocacion",
+            style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _locacion;
+  List getOption;
+
+  Future<String> _getLocacion() async {
+    await rootBundle.loadString("json/location.json").then((response) {
+      Map datos = json.decode(response);
+
+      setState(() {
+        getOption = datos["0"];
+      });
+    });
+  }
 }
-
-
