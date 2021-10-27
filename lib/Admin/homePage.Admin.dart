@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:pepe_food/Admin/adminShifOrders1.dart';
 import 'package:pepe_food/Admin/updateItems.dart';
+import 'package:pepe_food/Config/config.dart';
+import 'package:pepe_food/Models/address.dart';
 import 'package:pepe_food/Models/item.dart';
 import 'package:pepe_food/Store/storehome.dart';
 import 'package:pepe_food/Widgets/loadingWidget.dart';
@@ -96,7 +98,7 @@ class BodyHome extends StatefulWidget {
 }
 
 class _BodyHomeState extends State<BodyHome> {
-  get myLocacion => _locacion != null ? _locacion : "" ;
+  get myLocacion => _locacion != null ? _locacion : "";
 
   @override
   void initState() {
@@ -134,11 +136,14 @@ class _BodyHomeState extends State<BodyHome> {
   }
 
   Container MyLocation(Size size) {
-    return Container(margin: EdgeInsets.all(0),padding: EdgeInsets.all(0),
+    return Container(
+      margin: EdgeInsets.all(0),
+      padding: EdgeInsets.all(0),
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("images/test1.jpg"),fit: BoxFit.cover),
-          ),
-                height: 200,
+        image: DecorationImage(
+            image: AssetImage("images/carreterac.jpg"), fit: BoxFit.cover),
+      ),
+      height: 200,
       width: size.width,
       child: Column(
         children: [
@@ -163,23 +168,54 @@ class _BodyHomeState extends State<BodyHome> {
                   children: <Widget>[
                     Expanded(
                       child: DropdownButtonHideUnderline(
-                        child: ButtonTheme(disabledColor: null,
+                        child: ButtonTheme(
+                          disabledColor: null,
                           alignedDropdown: true,
                           child: DropdownButton<String>(
-                                                       value: _locacion,
+                            dropdownColor: Colors.grey,
+                            value: _locacion,
                             iconSize: 30,
-                            icon: (null),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold
+                            icon: Icon(
+                              Icons.location_city,
+                              color: Colors.white,
                             ),
-                            hint: Text('Locacion'),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                            hint: Text('Locacion',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold)),
                             onChanged: (String newValue) {
                               setState(() {
                                 _locacion = newValue;
 
                                 print(_locacion);
+                              });
+                              final model = AddressModel(
+                                locacion: _locacion.toString(),
+                                ciudad: "H.Matamoros",
+                                colonia: "Ejido Las Ventanas",
+                                estado: "Tamaulimas",
+                                addressID: DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString(),
+                              ).toJson();
+
+                              //add to firebase
+                              EcommerceApp.firestore
+                                  .collection("location_Admin")
+                                  .doc("myLocation")
+                                  .set(model)
+                                  .then((value) {
+                                final snack1 = ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Locacion Actulizada.")));
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
                               });
                             },
                             items: getOption?.map((item) {
@@ -209,8 +245,17 @@ class _BodyHomeState extends State<BodyHome> {
           ),
           Spacer(),
           Text(
-            "Los Clientes Saben que estas en $myLocacion",
-            style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.bold),
+            "Los Clientes Saben que estas en",
+            style: TextStyle(
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "$myLocacion",
+            style: TextStyle(
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ],
       ),
