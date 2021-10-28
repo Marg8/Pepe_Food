@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:pepe_food/Admin/adminShifOrders1.dart';
 import 'package:pepe_food/Admin/updateItems.dart';
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Models/address.dart';
 import 'package:pepe_food/Models/item.dart';
+import 'package:pepe_food/Models/request.dart';
 import 'package:pepe_food/Store/storehome.dart';
 import 'package:pepe_food/Widgets/loadingWidget.dart';
 import 'package:pepe_food/Widgets/searchBox.dart';
@@ -113,15 +115,7 @@ class _BodyHomeState extends State<BodyHome> {
     return Column(
       children: [
         MyLocation(size),
-        Container(
-          color: Colors.grey,
-          height: 200,
-          width: size.width,
-          child: Text(
-            "Lista de Requerimiento",
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
+        ReqList(size: size),
         Container(
           color: Colors.brown,
           height: 200,
@@ -212,8 +206,7 @@ class _BodyHomeState extends State<BodyHome> {
                                   .then((value) {
                                 final snack1 = ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
-                                        content: Text(
-                                            "Locacion Actulizada.")));
+                                        content: Text("Locacion Actulizada.")));
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                               });
@@ -274,4 +267,59 @@ class _BodyHomeState extends State<BodyHome> {
       });
     });
   }
+}
+
+class ReqList extends StatelessWidget {
+  const ReqList({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Flexible(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: EcommerceApp.firestore.collection("request").snapshots(),
+        builder: (context, snapshot) {
+          return ListView(
+            children: snapshot.data.docs.map((req) {
+              if (snapshot != null) {
+                return Center(
+                  child: Row(
+                    children: [
+                      Text(req["user"].toString()),
+                      Spacer(),
+                      Text(req["locacion"].toString()),
+                      Spacer(),
+                      Text(DateFormat.Md().format(req["time"].toDate())),
+                      Text("--"),
+                      Text(DateFormat.jm().format(req["time"].toDate()))
+                    ],
+                  )
+                  ,
+                );
+              } else {
+                circularProgress();
+              }
+            }).toList(),
+          );
+        },
+      ),
+    );
+  }
+}
+
+Widget sourceInfoRequest(Request modelReq, BuildContext context) {
+  final Size size = MediaQuery.of(context).size;
+  return Container(
+      color: Colors.blue,
+      height: size.height,
+      width: size.width,
+      child: Row(
+        children: [Text(modelReq.user.toString())],
+      ));
 }
