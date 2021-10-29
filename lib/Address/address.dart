@@ -1,13 +1,16 @@
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Counters/changeAddresss.dart';
 import 'package:pepe_food/Models/address.dart';
+import 'package:pepe_food/Models/request.dart';
 import 'package:pepe_food/Orders/placeOrderPayment.dart';
 import 'package:pepe_food/Widgets/customAppBar.dart';
 import 'package:pepe_food/Widgets/loadingWidget.dart';
 import 'package:pepe_food/Widgets/wideButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pepe_food/main.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'addAddress.dart';
 
@@ -21,6 +24,8 @@ class Address extends StatefulWidget {
 }
 
 class _AddressState extends State<Address> {
+
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -218,12 +223,28 @@ class _AddressCardState extends State<AddressCard> {
                   ? WideButton(
                       message: "Confirmar",
                       onPressed: () {
-                        Route route = MaterialPageRoute(
-                            builder: (c) => PaymentPage(
-                                  addressId: widget.addressId,
-                                  
-                                ));
-                        Navigator.push(context, route);
+                        String name = EcommerceApp.sharedPreferences.getString(EcommerceApp.userName);
+                        final model = Request(
+                          locacion: widget.model.locacion,
+                          user: name,
+                          time: Timestamp.now()
+                        ).toJson();
+
+                        //add to firebase
+                        EcommerceApp.firestore
+                            .collection("request")
+                            .doc()
+                            .set(model)
+                            .then((value) {
+                          final snack1 = ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(
+                                  content: Text("Solicitud enviada.")));
+                          FocusScope.of(context).requestFocus(FocusNode());
+
+                          Route route =
+                              MaterialPageRoute(builder: (c) => Hamburger());
+                          Navigator.push(context, route);
+                        });
                       },
                     )
                   : Container(),

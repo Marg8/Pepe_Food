@@ -115,14 +115,22 @@ class _BodyHomeState extends State<BodyHome> {
     return Column(
       children: [
         MyLocation(size),
+        ReqTitle(),
         ReqList(size: size),
         Container(
-          color: Colors.brown,
-          height: 200,
+           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+          ),
+         
+          height: 50,
           width: size.width,
-          child: Text(
-            "Pagina de productos",
-            style: TextStyle(color: Colors.black),
+          child: TextButton(
+            child: Text(
+              "Pagina de productos",
+              style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),
+            ),
+            
           ),
         ),
       ],
@@ -135,7 +143,7 @@ class _BodyHomeState extends State<BodyHome> {
       padding: EdgeInsets.all(0),
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("images/carreterac.jpg"), fit: BoxFit.cover),
+            image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
       ),
       height: 200,
       width: size.width,
@@ -146,7 +154,7 @@ class _BodyHomeState extends State<BodyHome> {
             child: Text(
               "Elegir mi Locacion",
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
             ),
@@ -267,6 +275,22 @@ class _BodyHomeState extends State<BodyHome> {
       });
     });
   }
+
+  ReqTitle() {
+    return Container(
+       decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+      ),
+      child: Row(children: [
+        Spacer(),
+        Text("Solicitudes",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20)),
+        Spacer(),
+       
+      ]
+      ),
+    );
+  }
 }
 
 class ReqList extends StatelessWidget {
@@ -282,32 +306,70 @@ class ReqList extends StatelessWidget {
     BuildContext context,
   ) {
     return Flexible(
-      child: StreamBuilder<QuerySnapshot>(
-        stream: EcommerceApp.firestore.collection("request").snapshots(),
-        builder: (context, snapshot) {
-          return ListView(
-            children: snapshot.data.docs.map((req) {
-              if (snapshot != null) {
-                return Center(
-                  child: Row(
-                    children: [
-                      Text(req["user"].toString()),
-                      Spacer(),
-                      Text(req["locacion"].toString()),
-                      Spacer(),
-                      Text(DateFormat.Md().format(req["time"].toDate())),
-                      Text("--"),
-                      Text(DateFormat.jm().format(req["time"].toDate()))
-                    ],
-                  )
-                  ,
-                );
-              } else {
-                circularProgress();
-              }
-            }).toList(),
-          );
-        },
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+        ),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: EcommerceApp.firestore.collection("request").orderBy("time",descending: true).snapshots(),
+          builder: (context, snapshot) {
+            return ListView(
+              children: snapshot.data.docs.map((req) {
+                if (snapshot != null) {
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.white,Colors.blue[100]],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(width: 15),
+                               Text("Nombre:",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+                               SizedBox(width: 10),
+                              Text(req["user"].toString(),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+                            ],
+                          ),
+                          Spacer(),
+                          Row(
+                            children: [
+                              SizedBox(width: 15),
+                              Text("Locacion:",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+                              SizedBox(width: 10),
+                              Text(req["locacion"].toString(),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+                            ],
+                          ),
+                          Spacer(),
+                          Row(
+                            children: [
+                              SizedBox(width: 15),
+                              Text("Hora:",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+                              SizedBox(width: 10),
+                              Text(DateFormat.Md().format(req["time"].toDate()),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+                              Text(" -- "),
+                              Text(DateFormat.jm().format(req["time"].toDate()),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  circularProgress();
+                }
+              }).toList(),
+            );
+          },
+        ),
       ),
     );
   }
