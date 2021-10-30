@@ -2,7 +2,7 @@ import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Counters/changeAddresss.dart';
 import 'package:pepe_food/Models/address.dart';
 import 'package:pepe_food/Models/request.dart';
-import 'package:pepe_food/Orders/placeOrderPayment.dart';
+
 import 'package:pepe_food/Widgets/customAppBar.dart';
 import 'package:pepe_food/Widgets/loadingWidget.dart';
 import 'package:pepe_food/Widgets/wideButton.dart';
@@ -10,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pepe_food/main.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 import 'addAddress.dart';
 

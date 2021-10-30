@@ -13,7 +13,7 @@ import '../Widgets/loadingWidget.dart';
 import '../Widgets/myDrawer.dart';
 import '../Widgets/searchBox.dart';
 import '../Models/item.dart';
-import 'cart.dart';
+
 
 double width;
 
@@ -61,16 +61,16 @@ class _StoreHomeState extends State<StoreHome> {
           actions: [
             Stack(
               children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Route route = MaterialPageRoute(builder: (c) => CartPage());
-                    Navigator.push(context, route);
-                  },
-                ),
+                // IconButton(
+                //   icon: Icon(
+                //     Icons.shopping_cart,
+                //     color: Colors.white,
+                //   ),
+                //   onPressed: () {
+                //     Route route = MaterialPageRoute(builder: (c) => CartPage());
+                //     Navigator.push(context, route);
+                //   },
+                // ),
                 Positioned(
                   child: Stack(
                     children: [

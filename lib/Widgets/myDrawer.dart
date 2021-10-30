@@ -1,7 +1,7 @@
 import 'package:pepe_food/Address/addAddress.dart';
-import 'package:pepe_food/Orders/myOrders.dart';
+
 import 'package:pepe_food/Store/Search.dart';
-import 'package:pepe_food/Store/cart.dart';
+
 import 'package:pepe_food/main.dart';
 import 'package:flutter/material.dart';
 import '../Authentication/authenication.dart';

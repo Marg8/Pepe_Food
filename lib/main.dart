@@ -12,7 +12,7 @@ import 'package:pepe_food/Counters/changeAddresss.dart';
 import 'package:pepe_food/Counters/totalMoney.dart';
 import 'package:pepe_food/Models/item.dart';
 import 'package:pepe_food/Models/producto_model.dart';
-import 'package:pepe_food/Store/cart.dart';
+
 import 'package:pepe_food/Widgets/loadingWidget.dart';
 import 'package:pepe_food/Widgets/myDrawer.dart';
 import 'package:pepe_food/src/categories.dart';
@@ -260,64 +260,7 @@ void _mostrarAlerta1(BuildContext context) {
   );
 }
 
-class AgregadosCompras extends StatelessWidget {
-  const AgregadosCompras({
-    Key key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        IconButton(
-          icon: Icon(
-            Icons.shopping_bag,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Route route = MaterialPageRoute(builder: (c) => CartPage());
-            Navigator.push(context, route);
-          },
-        ),
-        Positioned(
-          child: Stack(
-            children: [
-              Icon(
-                Icons.brightness_1,
-                size: 20.0,
-                color: Colors.white,
-              ),
-
-              //Video 11 o 19
-              //falta determinar la funcion de este indicador
-              Positioned(
-                top: 3.0,
-                bottom: 4.0,
-                left: 4.0,
-                child: Consumer<CartItemCounter>(
-                  builder: (context, counter, _) {
-                    return Text(0.toString());
-                    // Text(
-                    //   (EcommerceApp.sharedPreferences
-                    //               .getStringList(EcommerceApp.userCartList)
-                    //               .length -
-                    //           1)
-                    //       .toString(),
-                    //   style: TextStyle(
-                    //       color: Colors.black,
-                    //       fontSize: 12.0,
-                    //       fontWeight: FontWeight.w500),
-                    // );
-                  },
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
 
 class SplashScreen extends StatefulWidget {
   @override

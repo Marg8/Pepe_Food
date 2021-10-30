@@ -1,7 +1,7 @@
 import 'package:pepe_food/Authentication/authenication.dart';
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Counters/cartitemcounter.dart';
-import 'package:pepe_food/Store/cart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,9 +42,9 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Route route =
-                MaterialPageRoute(builder: (c) => CartPage());
-            Navigator.push(context, route);
+            //     Route route =
+            //     MaterialPageRoute(builder: (c) => CartPage());
+            // Navigator.push(context, route);
               },
             ),
             Positioned(
