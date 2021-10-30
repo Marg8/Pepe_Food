@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pepe_food">
+    package="com.marg.pepe_food.flutter">
    <application
-        android:label="pepe_food"
+        android:label="Pepe Food"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

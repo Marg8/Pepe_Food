@@ -35,6 +35,8 @@ class _ProductPageState extends State<ProductPage> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.yellow,
+            foregroundColor: Colors.black,
             title: Text(
               "Producto",
               style: TextStyle(color: Colors.black),
@@ -74,11 +76,14 @@ class _ProductPageState extends State<ProductPage> {
 
               Row(children: [
                 Container(
+                                
+                 
                   child: Image.network(
-                    widget.itemModel.thumbnailUrl,
+                    widget.itemModel.thumbnailUrl,fit: BoxFit.contain,
                   ),
                   width: 200,
-                  height: 200,
+                  height: 250,
+                  
                 ),
                 InofrmacionProducto(widget.itemModel),
               ]),

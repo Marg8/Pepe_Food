@@ -141,7 +141,7 @@ class _RegisterState extends State<Register> {
       ).then((auth){
         firebaseUser = auth.user;
     }).catchError((error){
-       Navigator.pop(context);
+      //  Navigator.pop(context);
        showDialog(
            context: context,
            builder: (c)

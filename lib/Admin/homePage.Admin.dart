@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pepe_food/Admin/adminShifOrders1.dart';
 import 'package:pepe_food/Admin/updateItems.dart';
+import 'package:pepe_food/Admin/uploadItems.dart';
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Models/address.dart';
 import 'package:pepe_food/Models/item.dart';
@@ -48,7 +49,11 @@ class _HomeAdminState extends State<HomeAdmin>
   // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[200],
+             
+        
         appBar: AppBar(
+
           title: Text(
             "Inicio",
             style: TextStyle(color: Colors.black),
@@ -56,7 +61,7 @@ class _HomeAdminState extends State<HomeAdmin>
           flexibleSpace: Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(
-                colors: [Colors.white, Colors.white],
+                colors: [Colors.blueGrey, Colors.blue[100]],
                 begin: const FractionalOffset(0.0, 0.0),
                 end: const FractionalOffset(1.0, 0.0),
                 stops: [0.0, 1.0],
@@ -64,12 +69,15 @@ class _HomeAdminState extends State<HomeAdmin>
               ),
             ),
           ),
-          leading: IconButton(
+          leading: IconButton(iconSize: 50,
             icon: Icon(
-              Icons.list,
+              Icons.food_bank,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+               Route route = MaterialPageRoute(builder: (c) => UploadPage());
+              Navigator.push(context, route);
+            },
           ),
           actions: [
             // goColorList(),
@@ -84,8 +92,8 @@ class _HomeAdminState extends State<HomeAdmin>
                 ),
               ),
               onPressed: () {
-                Route route = MaterialPageRoute(builder: (c) => SplashScreen());
-                Navigator.pushReplacement(context, route);
+                
+                Navigator.pop(context);
               },
             ),
           ],
@@ -117,22 +125,23 @@ class _BodyHomeState extends State<BodyHome> {
         MyLocation(size),
         ReqTitle(),
         ReqList(size: size),
-        Container(
-           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
-          ),
-         
-          height: 50,
-          width: size.width,
-          child: TextButton(
-            child: Text(
-              "Pagina de productos",
-              style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),
-            ),
-            
-          ),
-        ),
+        // Container(
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+        //   ),
+        //   height: 50,
+        //   width: size.width,
+        //   child: TextButton(
+        //     child: Text(
+        //       "Pagina de productos",
+        //       style: TextStyle(
+        //           color: Colors.white,
+        //           fontWeight: FontWeight.bold,
+        //           fontSize: 20),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
@@ -142,8 +151,13 @@ class _BodyHomeState extends State<BodyHome> {
       margin: EdgeInsets.all(0),
       padding: EdgeInsets.all(0),
       decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+        gradient: LinearGradient(
+          colors: [Colors.blueGrey, Colors.blue[100]],
+      ),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30),bottomRight:Radius.circular(30)),
+      //   image: DecorationImage(
+      //       image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+      // ),
       ),
       height: 200,
       width: size.width,
@@ -154,7 +168,7 @@ class _BodyHomeState extends State<BodyHome> {
             child: Text(
               "Elegir mi Locacion",
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
             ),
@@ -187,7 +201,7 @@ class _BodyHomeState extends State<BodyHome> {
                                 fontWeight: FontWeight.bold),
                             hint: Text('Locacion',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold)),
                             onChanged: (String newValue) {
@@ -248,7 +262,7 @@ class _BodyHomeState extends State<BodyHome> {
           Text(
             "Los Clientes Saben que estas en",
             style: TextStyle(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: 5,
@@ -256,8 +270,9 @@ class _BodyHomeState extends State<BodyHome> {
           Text(
             "$myLocacion",
             style: TextStyle(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
           ),
+          SizedBox(height: 8,)
         ],
       ),
     );
@@ -278,17 +293,19 @@ class _BodyHomeState extends State<BodyHome> {
 
   ReqTitle() {
     return Container(
-       decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
-      ),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //       image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+      // ),
       child: Row(children: [
+        SizedBox(width:30),
+        Text("Solicitudes de Clientes",
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20)),
         Spacer(),
-        Text("Solicitudes",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20)),
-        Spacer(),
-       
-      ]
-      ),
+      ]),
     );
   }
 }
@@ -307,67 +324,111 @@ class ReqList extends StatelessWidget {
   ) {
     return Flexible(
       child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
-        ),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage("images/star.jpg"), fit: BoxFit.cover),
+        // ),
         child: StreamBuilder<QuerySnapshot>(
-          stream: EcommerceApp.firestore.collection("request").orderBy("time",descending: true).snapshots(),
+          stream: EcommerceApp.firestore
+              .collection("request")
+              .orderBy("time", descending: true)
+              .snapshots(),
           builder: (context, snapshot) {
-            return ListView(
-              children: snapshot.data.docs.map((req) {
-                if (snapshot != null) {
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.white,Colors.blue[100]],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
+            if (snapshot.hasData) {
+              return ListView(
+                children: snapshot.data.docs.map((req) {
+                  if (snapshot != null) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 5,
+                        top: 5,
+                        left: 20,
+                        right: 20,
+                      ),
+                      child: Container(
+                        height: 100,
+                        
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Colors.blueGrey, Colors.blue[100]],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(24)),
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(width: 15),
+                                Text("Nombre:",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                                SizedBox(width: 10),
+                                Text(req["user"].toString(),
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                              ],
+                            ),
+                            Spacer(),
+                            Row(
+                              children: [
+                                SizedBox(width: 15),
+                                Text("Locacion:",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                                SizedBox(width: 10),
+                                Text(req["locacion"].toString(),
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                              ],
+                            ),
+                            Spacer(),
+                            Row(
+                              children: [
+                                SizedBox(width: 15),
+                                Text("Hora:",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                                SizedBox(width: 10),
+                                Text(
+                                  DateFormat.Md().format(req["time"].toDate()),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                Text(" -- "),
+                                Text(
+                                    DateFormat.jm()
+                                        .format(req["time"].toDate()),
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                               Text("Nombre:",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
-                               SizedBox(width: 10),
-                              Text(req["user"].toString(),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
-                            ],
-                          ),
-                          Spacer(),
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                              Text("Locacion:",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
-                              SizedBox(width: 10),
-                              Text(req["locacion"].toString(),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
-                            ],
-                          ),
-                          Spacer(),
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                              Text("Hora:",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
-                              SizedBox(width: 10),
-                              Text(DateFormat.Md().format(req["time"].toDate()),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
-                              Text(" -- "),
-                              Text(DateFormat.jm().format(req["time"].toDate()),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20)),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  circularProgress();
-                }
-              }).toList(),
-            );
+                    );
+                  } else {
+                    circularProgress();
+                  }
+                }).toList(),
+              );
+            }
+            return circularProgress();
           },
         ),
       ),

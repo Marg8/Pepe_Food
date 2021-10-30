@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:487785399755:android:06a3f8dd34a7f1f04ee24e",
         "android_client_info": {
-          "package_name": "com.example.pepe_food"
+          "package_name": "com.marg.pepe_food.flutter"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "487785399755-rd5ugajqs30lvfmpgo8vl2odjjdf1hbi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.pepe_food",
+            "package_name": "com.marg.pepe_food.flutter",
             "certificate_hash": "e9c87604fce89302402aefe439ada23fc1f910ff"
           }
         },

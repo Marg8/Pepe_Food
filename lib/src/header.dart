@@ -48,7 +48,7 @@ class _HeaderState extends State<Header> {
             children: [
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                height: size.height / 5,
+                height: size.height / 4.5,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
@@ -59,7 +59,7 @@ class _HeaderState extends State<Header> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 5,
+                      height: 3,
                     ),
                     Text(
                       "Donde esta Don Pepe?",

@@ -68,13 +68,7 @@ class _UploadPageState extends State<UploadPage> with AutomaticKeepAliveClientMi
             ),
           ),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.list, color: Colors.black,),
-          onPressed: () {
-            Route route = MaterialPageRoute(builder: (c) => AdminShiftOrders1());
-            Navigator.push(context, route);
-          },
-        ),
+        
 
         actions: [
           // goColorList(),
@@ -615,32 +609,32 @@ Widget sourceInfoAdmin(ItemModel model, BuildContext context,
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 30.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      r"$",
+                              // Padding(
+                              //   padding: EdgeInsets.only(left: 30.0),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         r"$",
 
 
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.red,
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                    Text(
-                                      (model.price + model.price*0.30 ?? '')
-                                          .toString().replaceAll(".0", ""),
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.red,
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              //         style: TextStyle(
+                              //           fontSize: 18.0,
+                              //           color: Colors.red,
+                              //           decoration: TextDecoration.lineThrough,
+                              //         ),
+                              //       ),
+                                    // Text(
+                                    //   (model.price + model.price*0.30 ?? '')
+                                    //       .toString().replaceAll(".0", ""),
+                                    //   style: TextStyle(
+                                    //     fontSize: 18.0,
+                                    //     color: Colors.red,
+                                    //     decoration: TextDecoration.lineThrough,
+                                    //   ),
+                                    // ),
+                              //     ],
+                              //   ),
+                              // ),
                               
                               
                             ],

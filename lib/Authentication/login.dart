@@ -49,7 +49,7 @@ class _LoginState extends State<Login>
             ),
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text("Login to your account",
+              child: Text("Ingresa con tu cuenta",
                   style: TextStyle(color: Colors.black)
               ),
             ),
@@ -99,13 +99,13 @@ class _LoginState extends State<Login>
             SizedBox(
               height: 10.0,
             ),
-            FlatButton.icon(
+            TextButton.icon(
               onPressed: () =>
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) => AdminSignInPage())),
-              icon: (Icon(Icons.nature_people, color: Colors.white,)),
-              label: Text("Soy Pepe Food", style: TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),),
+              icon: (Icon(Icons.nature_people, color: Colors.black,)),
+              label: Text("Entrada de Administrador", style: TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.bold),),
             )
           ],
         ),

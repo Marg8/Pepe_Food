@@ -24,8 +24,6 @@ class Address extends StatefulWidget {
 }
 
 class _AddressState extends State<Address> {
-
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,8 +72,6 @@ class _AddressState extends State<Address> {
                                       currentIndex: address.count,
                                       value: index,
                                       addressId: snapshot.data.docs[index].id,
-                                      
-                                      
                                       model: AddressModel.fromJson(
                                           snapshot.data.docs[index].data()),
                                     );
@@ -138,7 +134,8 @@ class AddressCard extends StatefulWidget {
       this.currentIndex,
       this.addressId,
       this.totalAmount,
-      this.value, this.cost})
+      this.value,
+      this.cost})
       : super(key: key);
 
   @override
@@ -204,14 +201,12 @@ class _AddressCardState extends State<AddressCard> {
                               ),
                               Text(widget.model.ciudad),
                             ]),
-                         
                             TableRow(children: [
                               KeyText(
                                 msg: "Estado",
                               ),
                               Text(widget.model.estado),
                             ]),
-                       
                           ],
                         ),
                       ),
@@ -223,12 +218,13 @@ class _AddressCardState extends State<AddressCard> {
                   ? WideButton(
                       message: "Confirmar",
                       onPressed: () {
-                        String name = EcommerceApp.sharedPreferences.getString(EcommerceApp.userName);
+                        String name = EcommerceApp.sharedPreferences
+                            .getString(EcommerceApp.userName);
                         final model = Request(
-                          locacion: widget.model.locacion,
-                          user: name,
-                          time: Timestamp.now()
-                        ).toJson();
+                                locacion: widget.model.locacion,
+                                user: name,
+                                time: Timestamp.now())
+                            .toJson();
 
                         //add to firebase
                         EcommerceApp.firestore

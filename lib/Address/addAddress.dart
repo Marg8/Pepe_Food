@@ -1,3 +1,4 @@
+import 'package:pepe_food/Address/address.dart';
 import 'package:pepe_food/Address/provideraddress.dart';
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Models/address.dart';
@@ -84,6 +85,9 @@ class _AddAddressState extends State<AddAddress> {
                 //scaffoldMessengerKey.currentState.showSnackBar(snack1);
                 FocusScope.of(context).requestFocus(FocusNode());
                 
+              }).then((value) {
+                Route route = MaterialPageRoute(builder: (c) => Address());
+                Navigator.pushReplacement(context, route);
               });
             }
           },
