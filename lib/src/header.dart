@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Store/Search.dart';
 import 'package:flutter/material.dart';
 
-import '../Widgets/loadingWidget.dart';
 
 class Header extends StatefulWidget {
   @override

@@ -2,14 +2,12 @@ import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/Counters/cartitemcounter.dart';
 import 'package:pepe_food/Models/item.dart';
 import 'package:pepe_food/Store/product_page.dart';
-import 'package:pepe_food/Store/storehome.dart';
-import 'package:pepe_food/Widgets/loadingWidget.dart';
-import 'package:pepe_food/Widgets/searchBox.dart';
+
 import 'package:pepe_food/main.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 

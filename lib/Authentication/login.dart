@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 
@@ -27,7 +28,7 @@ class _LoginState extends State<Login>
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailTextEditingController = TextEditingController();
   final TextEditingController _passwordTextEditingController = TextEditingController();
-
+   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
 
@@ -73,17 +74,53 @@ class _LoginState extends State<Login>
                 ],
               ),
             ),
+            GestureDetector(
+                    child: Text(
+                      "Click here to Read and Accept Security Policy",
+                      style: TextStyle(
+                          color: Colors.blueGrey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                    onTap: () {
+                      _launchUrl(
+                          "https://docs.google.com/document/d/1hUhnBEjC6K6Tn9ju0TvokfmVWPxpxn9X/edit?usp=sharing&ouid=117237507655107805599&rtpof=true&sd=true");
+                    },
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      _checkBox(),
+                      // SizedBox(
+                      //   width: 5,
+                      // ),
+                      Text(
+                        "I have Read and accept Security Policy",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
+                      )
+                    ],
+                  ),
 
             RaisedButton(
               onPressed: () {
+               
                 _emailTextEditingController.text.isNotEmpty &&
-                    _passwordTextEditingController.text.isNotEmpty ?
-                loginUser(): showDialog(context: context,
-                builder: (c)
-                {
-                return ErrorAlertDialog1 (message: "Please write email and password.",);
-                }
-                );
+                        _passwordTextEditingController.text.isNotEmpty &&
+                        isChecked == true
+                    ? loginUser(context, isChecked)
+                    : showDialog(
+                        context: context,
+                        builder: (c) {
+                          return ErrorAlertDialog1(
+                            message:
+                                "Please write email and password and accept Security Policy.",
+                          );
+                        });
               },
               color: Colors.black,
               child: Text("Iniciar", style: TextStyle(color: Colors.white),),
@@ -112,9 +149,20 @@ class _LoginState extends State<Login>
       ),
     );
   }
+
+   Widget _checkBox() {
+    return Checkbox(
+        
+        value: isChecked,
+        onChanged: (valor) {
+          setState(() {
+            isChecked = valor;
+          });
+        });
+  }
     FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void loginUser() async
+  void loginUser(ontext, bool checkBox) async
   {
     showDialog(
         context: context,
@@ -156,11 +204,22 @@ class _LoginState extends State<Login>
       await EcommerceApp.sharedPreferences.setString(EcommerceApp.userName, dataSnapshot.data()[EcommerceApp.userName]);
       
 
-      List<String> carList = dataSnapshot.data()[EcommerceApp.userCartList].cast<String>();
-      await EcommerceApp.sharedPreferences.setStringList(EcommerceApp.userCartList, carList);
+      
+      
     });
   }
+  Future<void> _launchUrl(String urlString) async {
+    if (await canLaunch(urlString)) {
+      await launch(urlString, forceWebView: true);
+    } else {
+      ErrorAlertDialog1(
+        message: "Please Review your internet conection",
+      );
+    }
+  }
 }
+  
+
 
 class ErrorAlertDialog {
 }

@@ -1,14 +1,15 @@
 import 'dart:io';
 import 'package:pepe_food/Config/config.dart';
 import 'package:pepe_food/DialogBox/errorDialog.dart';
-import 'package:pepe_food/DialogBox/loadingDialog.dart';
+
 import 'package:pepe_food/Widgets/customTextField.dart';
 import 'package:pepe_food/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 
@@ -29,6 +30,7 @@ class _RegisterState extends State<Register> {
   String userImageUrl = "";
   File _imageFile;
   final ImagePicker pickerImg = ImagePicker();
+   bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,37 @@ class _RegisterState extends State<Register> {
                     hintText: "Confirmar Password",
                     isObsecure: true,
                   ),
+                  GestureDetector(
+                    child: Text(
+                      "Click here to Read and Accept Security Policy",
+                      style: TextStyle(
+                          color: Colors.blueGrey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                    onTap: () {
+                      _launchUrl(
+                          "https://docs.google.com/document/d/1hUhnBEjC6K6Tn9ju0TvokfmVWPxpxn9X/edit?usp=sharing&ouid=117237507655107805599&rtpof=true&sd=true");
+                    },
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      _checkBox(),
+                      // SizedBox(
+                      //   width: 5,
+                      // ),
+                      Text(
+                        "I have Read and accept Security Policy",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
@@ -104,6 +137,25 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  Widget _checkBox() {
+    return Checkbox(
+        value: isChecked,
+        onChanged: (valor) {
+          setState(() {
+            isChecked = valor;
+          });
+        });
+  }
+
+  Future<void> _launchUrl(String urlString) async {
+    if (await canLaunch(urlString)) {
+      await launch(urlString, forceWebView: true);
+    } else {
+      ErrorAlertDialog1(
+        message: "Please Review your internet conection",
+      );
+    }
+  }
 
 
   Future<void> uploadAndSaveImage() async

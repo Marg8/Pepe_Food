@@ -1,19 +1,12 @@
 import 'package:pepe_food/Address/address.dart';
 import 'package:pepe_food/Config/config.dart';
-import 'package:pepe_food/Counters/cartitemcounter.dart';
+
 import 'package:pepe_food/Models/item.dart';
-import 'package:pepe_food/Store/storehome.dart';
-import 'package:pepe_food/Widgets/loadingWidget.dart';
 
-import 'package:pepe_food/main.dart';
-
-import 'package:pepe_food/src/categories.dart';
 import 'package:pepe_food/src/hamburgers_list.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 
 TextEditingController _extraTextEditingController = TextEditingController();
 TextEditingController _notaTextEditingController = TextEditingController();
@@ -76,14 +69,12 @@ class _ProductPageState extends State<ProductPage> {
 
               Row(children: [
                 Container(
-                                
-                 
                   child: Image.network(
-                    widget.itemModel.thumbnailUrl,fit: BoxFit.contain,
+                    widget.itemModel.thumbnailUrl,
+                    fit: BoxFit.contain,
                   ),
                   width: 200,
                   height: 250,
-                  
                 ),
                 InofrmacionProducto(widget.itemModel),
               ]),

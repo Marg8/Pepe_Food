@@ -1,9 +1,8 @@
 import 'package:pepe_food/Authentication/authenication.dart';
-import 'package:pepe_food/Config/config.dart';
-import 'package:pepe_food/Counters/cartitemcounter.dart';
+
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   final PreferredSizeWidget bottom;
